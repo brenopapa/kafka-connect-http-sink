@@ -1,6 +1,6 @@
 # Kafka Connect HTTP Sink Connector
 
-This HTTP Sink connector was modified to support Carol Platform integration and the original author is [asaintsever](https://github.com/asaintsever/kafka-connect-http-sink). Al documentation regarging the base connector is available in the original repo.
+This HTTP Sink connector was modified to support Carol Platform integration and the original author is [asaintsever](https://github.com/asaintsever/kafka-connect-http-sink). All documentation regarging the base connector is available in the original repo.
 
 ## Added features
 

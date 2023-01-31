@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.kafka.connect.sink.SinkRecord;
+
 import asaintsever.httpsinkconnector.config.IConfigAccessor;
 
 public interface IEventFormatter extends IConfigAccessor {

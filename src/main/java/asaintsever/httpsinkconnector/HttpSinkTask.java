@@ -9,6 +9,7 @@ import org.apache.kafka.connect.sink.SinkRecord;
 import org.apache.kafka.connect.sink.SinkTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import asaintsever.httpsinkconnector.config.HttpSinkConnectorConfig;
 import asaintsever.httpsinkconnector.event.formatter.IEventFormatter;
 import asaintsever.httpsinkconnector.http.HttpEndpoint;
@@ -40,10 +41,9 @@ public class HttpSinkTask extends SinkTask {
 
         IAuthenticationProvider authProv = config.getHttpReqAuthProvider();
         authProv.configure(config.originalsWithPrefix(HttpSinkConnectorConfig.HTTP_REQ_AUTHENTICATION_PROVIDER_CLASS_PARAM_PREFIX));
-        
+                
         IEventFormatter eventFormatter = config.getEventFormatter();
         eventFormatter.configure(config.originalsWithPrefix(HttpSinkConnectorConfig.EVENT_FORMATTER_CLASS_PARAM_PREFIX));
-        
         this.endpoint = new HttpEndpoint(
                 this.config.getHttpEndpoint(), 
                 this.config.getHttpConnectTimeout(),
@@ -52,7 +52,9 @@ public class HttpSinkTask extends SinkTask {
                 authProv,
                 this.config.getHttpReqContentType(), 
                 eventFormatter,
-                this.config.getHttpRespValidStatusCodes());
+                this.config.getHttpRespValidStatusCodes(),
+                this.config.getCarolConnectorId(),
+                this.config.getCarolAuthorization());
         
         this.retryIndex = 0;
     }

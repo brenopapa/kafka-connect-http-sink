@@ -12,8 +12,9 @@ import org.apache.kafka.common.config.ConfigDef.Type;
 import org.apache.kafka.common.config.ConfigDef.Validator;
 import org.apache.kafka.common.config.ConfigDef.Width;
 import org.apache.kafka.common.config.ConfigException;
-import asaintsever.httpsinkconnector.event.formatter.PassthroughStringEventFormatter;
+
 import asaintsever.httpsinkconnector.event.formatter.IEventFormatter;
+import asaintsever.httpsinkconnector.event.formatter.PassthroughStringEventFormatter;
 import asaintsever.httpsinkconnector.http.authentication.IAuthenticationProvider;
 import asaintsever.httpsinkconnector.http.authentication.NoAuthenticationProvider;
 import asaintsever.httpsinkconnector.utils.ClassLoaderHelper;
@@ -23,6 +24,7 @@ public class HttpSinkConnectorConfig extends AbstractConfig {
     private static final String EVENT_GROUP = "Event";
     private static final String HTTP_GROUP = "HTTP";
     private static final String RETRIES_GROUP = "Retries";
+    private static final String CAROL_GROUP = "Carol Platform";
 
     // Event settings
     public static final String EVENT_MAX_BATCH_SIZE_CONFIG = "event.batch.maxsize";
@@ -84,7 +86,16 @@ public class HttpSinkConnectorConfig extends AbstractConfig {
     private static final int HTTP_REQ_RETRY_MAX_ATTEMPTS_DEFAULT = 5;
     public static final String HTTP_REQ_RETRY_MAX_ATTEMPTS_DISPLAYNAME = "HTTP Request Retry Max Attempts";
     public static final String HTTP_REQ_RETRY_MAX_ATTEMPTS_DOC = "Max number of retries for a errored request";
-        
+    
+    public static final String CAROL_CONNECTOR_ID_CONFIG = "carol.connectorid";
+    private static final String CAROL_CONNECTOR_ID_DEFAULT = "";
+    public static final String CAROL_CONNECTOR_ID_DISPLAYNAME = "Carol Connector Id";
+    public static final String CAROL_CONNECTOR_ID_DOC = "Your Carol Connector Id";
+    
+    public static final String CAROL_AUTHORIZATION_CONFIG = "carol.authorization";
+    private static final String CAROL_AUTHORIZATION_DEFAULT = "";
+    public static final String CAROL_AUTHORIZATION_DISPLAYNAME = "Carol Authorization Token";
+    public static final String CAROL_AUTHORIZATION_DOC = "Your Carol Authorization Token, example: Bearer XXXXXXXXXXXXXX";
     
     public static ConfigDef configDef(Map<?, ?> originals) {
         ConfigDef connectorConfigDef = new ConfigDef()
@@ -102,6 +113,9 @@ public class HttpSinkConnectorConfig extends AbstractConfig {
                 .define(HTTP_REQ_RETRY_EXPBACKOFF_BASE_INTERVAL_MS_CONFIG, Type.LONG, HTTP_REQ_RETRY_EXPBACKOFF_BASE_INTERVAL_MS_DEFAULT, Importance.MEDIUM, HTTP_REQ_RETRY_EXPBACKOFF_BASE_INTERVAL_MS_DOC, RETRIES_GROUP, 0, Width.SHORT, HTTP_REQ_RETRY_EXPBACKOFF_BASE_INTERVAL_MS_DISPLAYNAME)
                 .define(HTTP_REQ_RETRY_EXPBACKOFF_MULTIPLIER_CONFIG, Type.DOUBLE, HTTP_REQ_RETRY_EXPBACKOFF_MULTIPLIER_DEFAULT, Importance.MEDIUM, HTTP_REQ_RETRY_EXPBACKOFF_MULTIPLIER_DOC, RETRIES_GROUP, 1, Width.SHORT, HTTP_REQ_RETRY_EXPBACKOFF_MULTIPLIER_DISPLAYNAME)
                 .define(HTTP_REQ_RETRY_MAX_ATTEMPTS_CONFIG, Type.INT, HTTP_REQ_RETRY_MAX_ATTEMPTS_DEFAULT, Importance.MEDIUM, HTTP_REQ_RETRY_MAX_ATTEMPTS_DOC, RETRIES_GROUP, 2, Width.SHORT, HTTP_REQ_RETRY_MAX_ATTEMPTS_DISPLAYNAME)
+                // Carol group
+                .define(CAROL_CONNECTOR_ID_CONFIG, Type.STRING, CAROL_CONNECTOR_ID_DEFAULT, Importance.MEDIUM, CAROL_CONNECTOR_ID_DOC, CAROL_GROUP, 0, Width.SHORT, CAROL_CONNECTOR_ID_DISPLAYNAME)
+                .define(CAROL_AUTHORIZATION_CONFIG, Type.STRING, CAROL_AUTHORIZATION_DEFAULT, Importance.MEDIUM, CAROL_AUTHORIZATION_DOC, CAROL_GROUP, 1, Width.SHORT, CAROL_AUTHORIZATION_DISPLAYNAME)
                 ;
         
         // Add config defined for EVENT_FORMATTER_CLASS_CONFIG
@@ -177,7 +191,12 @@ public class HttpSinkConnectorConfig extends AbstractConfig {
     public Integer getHttpReqRetryMaxAttempts() {
         return getInt(HTTP_REQ_RETRY_MAX_ATTEMPTS_CONFIG);
     }
-    
+    public String getCarolConnectorId() {
+        return getString(CAROL_CONNECTOR_ID_CONFIG);
+    }
+    public String getCarolAuthorization() {
+        return getString(CAROL_AUTHORIZATION_CONFIG);
+    }
 
     static class ClassValidator implements Validator {
         

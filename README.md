@@ -21,7 +21,7 @@ The connector will always call `https://myorgdomain.carol.ai/api/v3/staging/inta
 
 The connector needs a Carol Token to be authenticated (carol.authorization property). The token can be obtained in the admin panel of the tenant you wish to send data.
 
-Important: currently the staging table has to have the exact name of the topic, so the connector can build the correct URL to send data to. It will always format the topic name removing dots and using toLowerCase() function. Examples:
+Important: currently the staging table has to have the exact name of the topic and has to exist prior to the connector setup, so the connector can build the correct URL to send data to. It will always format the topic name removing dots and using toLowerCase() function. Examples:
 
 | Topic Name  | Carol Staging Table Name |
 |---|---|

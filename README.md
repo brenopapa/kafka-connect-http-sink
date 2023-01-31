@@ -21,13 +21,13 @@ The connector will always call `https://myorgdomain.carol.ai/api/v3/staging/inta
 
 The connector needs a Carol Token to be authenticated (carol.authorization property). The token can be obtained in the admin panel of the tenant you wish to send data.
 
-Important: currently the staging table has to have the exact name of the topic, so the connector can build the correct URL to send data to. It will always format the topic name removing dots and using toLowerCase() function Examples:
+Important: currently the staging table has to have the exact name of the topic, so the connector can build the correct URL to send data to. It will always format the topic name removing dots and using toLowerCase() function. Examples:
 
 | Topic Name  | Carol Staging Table Name |
 |---|---|
 | postgres.public.Users | postgrespublicusers |
-| some.table | sometable |
-| anothertable | anothertable |
+| some.topic | sometopic |
+| ANOTHERTOPIC | anothertopic |
 
 Sample configuration file can be found [here](/src/main/resources/connector_HttpSinkConnector_config.json). Use the release package on your Kafka Cluster.
 Prefer using io.confluent.connect.avro.AvroConverter for message conversion on source connectors and this sink connector to ensure that the HTTP payload will satisfy Carol API intake format.

@@ -1,0 +1,21 @@
+{
+  "name": "HttpSinkConnector",
+  "config": {
+    "connector.class": "asaintsever.httpsinkconnector.HttpSinkConnector",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "topics": "postgres.public.Users, postgres.public.Books",
+    "errors.deadletterqueue.topic.name": "HttpSinkConnector_errors",
+    "errors.deadletterqueue.topic.replication.factor": "1",
+    "errors.deadletterqueue.context.headers.enable": "true",
+    "event.batch.maxsize": "3",
+    "event.formatter.class": "asaintsever.httpsinkconnector.event.formatter.CarolPGSQLEventFormatter",
+    "http.endpoint": "https://myorgdomain.carol.ai",
+    "http.request.authentication.provider.class": "asaintsever.httpsinkconnector.http.authentication.NoAuthenticationProvider",
+    "carol.connectorid": "myconnectorid",
+    "carol.authorization": "mycaroltoken",
+    "value.converter.schema.registry.url": "http://localhost:8081",
+    "value.converter.schemas.enable": "false",
+    "key.converter.schema.registry.url": "http://localhost:8081"
+  }
+}

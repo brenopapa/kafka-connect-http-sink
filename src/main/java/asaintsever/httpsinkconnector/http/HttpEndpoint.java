@@ -136,25 +136,8 @@ public class HttpEndpoint {
                 .header("X-Auth-ConnectorId", this.carolConnectorId)
                 .POST(BodyPublishers.ofString(new String(data)))
                 ;
-//        // Add HTTP authentication header(s)
-//        if (this.authenticationProvider.addAuthentication() != null)
-//            reqBuilder.headers(this.authenticationProvider.addAuthentication());
-       
-//        HttpRequest.Builder StagingreqBuilder = HttpRequest.newBuilder()
-//                .uri(URI.create("https://datascience.carol.ai/api/v3/staging/tables/autotest/schema?connectorId=e568dea9670746d0a6fec8cd2e3e8027"))
-//                .timeout(Duration.ofMillis(this.readTimeout))
-//                .header("Content-Type", this.contentType)
-//                .POST(BodyPublishers.ofString(new String(
-//                		"{\"mdmFlexible\": \"false\", \"mdmExportData\": \"false\",\"mdmStagingMapping\":{\"properties\":{\"cod-emitente\":{\"type\":\"integer\"},\"cgc\":{\"type\":\"string\"}, \"nome-emit\":{\"type\":\"string\"}}},\"mdmCrosswalkTemplate\":{\"mdmCrossreference\":{\"emitente\":[\"cod-emitente\"]}}}"             		
-//                		)))
-//                ;
-//        
-//        // Add HTTP authentication header(s)
-//        if (this.authenticationProvider.addAuthentication() != null)
-//        	StagingreqBuilder.headers(this.authenticationProvider.addAuthentication());
-//            reqBuilder.headers(this.authenticationProvider.addAuthentication());
-//        
-//        httpCli.send(StagingreqBuilder.build(), BodyHandlers.ofString());
+        		
+        		//TODO Add Verification to check if staging table exists, if not, create it using schema.
         return httpCli.send(reqBuilder.build(), BodyHandlers.ofString());
     }
     

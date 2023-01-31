@@ -29,5 +29,6 @@ Important: currently the staging table has to have the exact name of the topic, 
 | some.topic | sometopic |
 | ANOTHERTOPIC | anothertopic |
 
-Sample configuration file can be found [here](/src/main/resources/connector_HttpSinkConnector_config.json). Use the release package on your Kafka Cluster.
-Prefer using io.confluent.connect.avro.AvroConverter for message conversion on source connectors and this sink connector to ensure that the HTTP payload will satisfy Carol API intake format.
+## Usage
+
+Sample configuration file can be found [here](/src/main/resources/connector_HttpSinkConnector_config.json). Use the release package on your Kafka Cluster, if further modification is required, clone this repo in e.g. Eclipse IDE, make your changes, use Maven Install to generate new .jar file and replace the generated one in the release package locally. Prefer using io.confluent.connect.avro.AvroConverter for message conversion on source connectors and this sink connector to ensure that the HTTP payload will satisfy Carol API intake format.

@@ -30,6 +30,13 @@ Important: currently the staging table has to have the exact name of the topic a
 | ANOTHERTOPIC | anothertopic |
 
 ## Usage
+Cluster setup and configurations (local and dockerized) here: 
+
+https://github.com/brenopapa/POC-KafkaConnect#setup-kafka-connect---confluent-platform 
+
+
+https://github.com/brenopapa/POC-KafkaConnect#utilizando-docker
+
 
 Sample configuration file can be found [here](/src/main/resources/connector_HttpSinkConnector_config.json). 
 
